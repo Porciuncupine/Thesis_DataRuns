@@ -22,3 +22,25 @@
   library(lars)
   library(ggplot2)  
   
+  
+#loading,transposing, and naming datasets
+ARB <- t(Thesis.Dataset...Benficiaries)
+Roads <- t(Thesis.Dataset...Roads)
+Inequality <- t(Thesis.Dataset...Gini.Coefficient)
+Cases_Solved <- t(Thesis.Dataset...Agrarian.Cases.Solved)
+
+#Subsetting Data For Initial Test 99-00
+ARBTest <- ARB[2:3,"Philippines"]
+RoadsTest <- Roads[18:19, "Philippines"]
+InequalityTest <- Inequality[5:6, "Gini coefficient"]
+Cases_SolvedTest <- Cases_Solved[12:13, "Cases Solved"]
+
+#Bind all Data Sets 
+mydata <- cbind(ARBTest,RoadsTest,InequalityTest,Cases_SolvedTest)
+print(mydata)
+
+#Simple Regression
+lm(formula=X1999~X2000, data=mydata)
+
+
+

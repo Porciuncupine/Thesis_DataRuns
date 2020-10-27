@@ -37,10 +37,12 @@ Cases_SolvedTest <- Cases_Solved[12:13, "Cases Solved"]
 
 #Bind all Data Sets 
 mydata <- cbind(ARBTest,RoadsTest,InequalityTest,Cases_SolvedTest)
+mydata.df <- data.frame(mydata)
 print(mydata)
 
 #Simple Regression
-lm(formula=X1999~X2000, data=mydata)
+lm(formula= ARBTest~RoadsTest+InequalityTest+Cases_SolvedTest, data=mydata.df)
+
 
 
 

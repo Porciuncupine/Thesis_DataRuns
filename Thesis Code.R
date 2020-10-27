@@ -28,20 +28,23 @@ ARB <- t(Thesis.Dataset...Benficiaries)
 Roads <- t(Thesis.Dataset...Roads)
 Inequality <- t(Thesis.Dataset...Gini.Coefficient)
 Cases_Solved <- t(Thesis.Dataset...Agrarian.Cases.Solved)
+print(Cases_Solved)
 
 #Subsetting Data For Initial Test 99-00
 ARBTest <- ARB[2:3,"Philippines"]
 RoadsTest <- Roads[18:19, "Philippines"]
 InequalityTest <- Inequality[5:6, "Gini coefficient"]
 Cases_SolvedTest <- Cases_Solved[12:13, "Cases Solved"]
+print(Cases_SolvedTest)
 
 #Bind all Data Sets 
 mydata <- cbind(ARBTest,RoadsTest,InequalityTest,Cases_SolvedTest)
 mydata.df <- data.frame(mydata)
-print(mydata)
+print(mydata.df)
 
 #Simple Regression
-lm(formula= ARBTest~RoadsTest+InequalityTest+Cases_SolvedTest, data=mydata.df)
+lm(formula= ARBTest~RoadsTest+InequalityTest+Cases_SolvedTest , data=mydata.df)
+
 
 
 

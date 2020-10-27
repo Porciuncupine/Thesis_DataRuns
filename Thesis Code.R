@@ -43,8 +43,9 @@ mydata.df <- data.frame(mydata)
 print(mydata.df)
 
 #Simple Regression
-lm(formula= ARBTest~RoadsTest+InequalityTest+Cases_SolvedTest , data=mydata.df)
-
+LReg <- lm(formula= ARBTest~RoadsTest+InequalityTest+Cases_SolvedTest , data=mydata.df)
+LReg
+summary(LReg)
 
 
 

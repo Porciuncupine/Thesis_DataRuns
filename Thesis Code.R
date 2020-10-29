@@ -23,6 +23,8 @@
   library(lars)
   library(ggplot2)  
   
+##############################################################################################
+  
   
 #loading,transposing, and naming datasets
 ARB <- t(Thesis.Dataset...Benficiaries)
@@ -48,6 +50,7 @@ print(mydata.df)
 LReg <- lm(formula= ARBTest~RoadsTest+InequalityTest+Cases_SolvedTest , data=mydata.df)
 LReg
 summary(LReg)
+plot(LReg)
 
 ##########################################################################################
 
@@ -66,7 +69,7 @@ print(mydata2.df)
 LReg <- lm(formula= ARBTest2~RoadsTest2+InequalityTest2, data=mydata2.df)
 LReg
 summary(LReg)
-plot(LReg)
+
 
 #checking pearson correlation
 cor(RoadsTest2,InequalityTest2, method="pearson")
@@ -78,20 +81,46 @@ cor(RoadsTest2,InequalityTest2, method="pearson")
 ARBTest3 <- ARB[2:20,"Philippines"]
 RoadsTest3 <- Roads[18:36, "Philippines"]
 InequalityTest3 <- Inequality[5:23, "Gini coefficient"]
-CompRate3 <- CompRate[15:33, "Philippines"]
+CompRateTest3 <- CompRate[15:33, "Philippines"]
 print(ARBTest3)
 
-
 #Bind all Data Sets for Test 3
-mydata3 <- rbind(RoadsTest3,InequalityTest3,CompRate3,ARBTest3)
+mydata3 <- rbind(RoadsTest3,InequalityTest3,CompRateTest3,ARBTest3)
 mydata3.df <- data.frame(mydata3)
 print(mydata3.df)
 
 #Simple Regression Test 3
-LReg <- lm(formula= CompRate3~RoadsTest3+InequalityTest3+ARBTest3, data=mydata3.df)
+LReg <- lm(formula= ARBTest3~RoadsTest3+InequalityTest3, data=mydata3.df)
 LReg
 summary(LReg)
+plot(LReg)
 
 #checking pearson correlation
-cor(ARBTest3,RoadsTest3, method="pearson")
+cor(CompRateTest3,RoadsTest3, method="pearson")
 
+
+########################################################################################
+
+#log 
+ARBTest3 <-as.numeric(ARBTest3)
+LogARBTest3 <- log(ARBTest3)
+LogRoadsTest3 <- log(RoadsTest3)
+LogInequalityTest3 <- log(InequalityTest3)
+CompRateTest3 <- as.numeric(CompRateTest3)
+LogCompRateTest3 <- log(CompRateTest3)
+print(LogARBTest3)
+
+#Bind all Data Sets for Test Log
+mydata4 <- rbind(LogRoadsTest3,LogInequalityTest3,LogCompRateTest3,LogARBTest3)
+mydata4.df <- data.frame(mydata4)
+print(mydata4.df)
+
+#Log-Log
+LogReg <- lm(formula= LogARBTest3~LogRoadsTest3+LogInequalityTest3+LogCompRate3, data=mydata4.df)
+LogReg
+summary(LogReg)
+
+#Log-Log2 Completion Rate
+LogReg2 <- lm(formula= LogCompRateTest3~LogRoadsTest3+LogInequalityTest3+LogARBTest3, data=mydata3.df)
+LogReg2
+summary(LogReg2)

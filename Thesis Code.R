@@ -30,9 +30,17 @@
 ARB <- t(Thesis.Dataset...Benficiaries)
 Roads <- t(Thesis.Dataset...Roads)
 Inequality <- t(Thesis.Dataset...Gini.Coefficient)
-Cases_Solved <- t(Thesis.Dataset...Agrarian.Cases.Solved)
+Cases_Solved <- t(Thesis.Dataset...Adjudication.Cases.Resolved.per.Year)
 CompRate <- t(Thesis.Dataset...Gross.Area.Accomplished)
-print(CompRate)
+AllImports <- t(Thesis_Dataset_All_Imports)
+AllExports <- t(Thesis_Dataset_All_Exports_)
+CerealImports <- t(`Thesis.Dataset...Rice.and.Corn.Imports.Value.in.Nominal.US$`)
+CompPer <- t(Thesis.Dataset...Accomplishment.Rate)
+ALICases <- t(Thesis.Dataset...ALI)
+Pending <- t(Thesis.Dataset...Pending_Caseload.Agrarian.Law.IMP)
+Prod <- t(Thesis.Dataset...Production)
+Yield <- t(Thesis.Dataset...Yield)
+print(Yield)
 
 #Subsetting Data For Initial Test 99-00
 ARBTest <- ARB[2:3,"Philippines"]
@@ -101,26 +109,103 @@ cor(CompRateTest3,RoadsTest3, method="pearson")
 
 ########################################################################################
 
-#log 
-ARBTest3 <-as.numeric(ARBTest3)
-LogARBTest3 <- log(ARBTest3)
-LogRoadsTest3 <- log(RoadsTest3)
-LogInequalityTest3 <- log(InequalityTest3)
-CompRateTest3 <- as.numeric(CompRateTest3)
-LogCompRateTest3 <- log(CompRateTest3)
-print(LogARBTest3)
+#ARBs ~ SOLVED + IMPORTS + EXPORTS + ROADS, 99-18
+
+ARBTest00 <- as.numeric(ARB[2:21,"Philippines"])
+RoadsTest00 <- as.numeric(Roads[18:37, "Philippines"])
+AllImports00 <- as.numeric(AllImports[21:40,1])
+AllExports00 <- as.numeric(AllExports[21:40,1])
+Cases_Solved00 <- as.numeric(Cases_Solved[12:31,1])
+InequalityTest00 <- Inequality[5:24, "Gini coefficient"]
+print(InequalityTest00)
 
 #Bind all Data Sets for Test Log
-mydata4 <- rbind(LogRoadsTest3,LogInequalityTest3,LogCompRateTest3,LogARBTest3)
+mydata4 <- rbind(ARBTest00,RoadsTest00,AllImports00,AllExports00,Cases_Solved00,InequalityTest00)
 mydata4.df <- data.frame(mydata4)
 print(mydata4.df)
 
-#Log-Log
-LogReg <- lm(formula= LogARBTest3~LogRoadsTest3+LogInequalityTest3+LogCompRate3, data=mydata4.df)
+#Simple Regression Test 3
+LReg <- lm(formula= ARBTest00~RoadsTest00+AllExports00+AllImports00+Cases_Solved00, data=mydata4.df)
+LReg
+summary(LReg)
+
+
+#log 
+LogARBTest00 <- log(as.numeric(ARB[2:21,"Philippines"]))
+LogRoadsTest00 <- log(as.numeric(Roads[18:37, "Philippines"]))
+LogAllImports00 <- log(as.numeric(AllImports[21:40,1]))
+LogAllExports00 <- log(as.numeric(AllExports[21:40,1]))
+LogCases_Solved00 <- log(as.numeric(Cases_Solved[12:31,1]))
+LogInequalityTest00 <- log(Inequality[5:24, "Gini coefficient"])
+print(LogRoadsTest00)
+
+#Bind all Data Sets for Test Log
+mydata4 <- rbind(LogRoadsTest00,LogAllImports00,LogAllExports00,LogARBTest00,LogCases_Solved00,LogInequalityTest00)
+mydata4.df <- data.frame(mydata4)
+print(mydata4.df)
+
+#Simple Regression Test 3
+LogReg <- lm(formula= LogARBTest00~LogRoadsTest00+LogAllImports00+LogAllExports00+LogCases_Solved00, data=mydata4.df)
 LogReg
 summary(LogReg)
 
-#Log-Log2 Completion Rate
-LogReg2 <- lm(formula= LogCompRateTest3~LogRoadsTest3+LogInequalityTest3+LogARBTest3, data=mydata3.df)
-LogReg2
-summary(LogReg2)
+
+###############################################################
+#CompRate ~ ALI Cases + Imports + Exports + Roads + Gini, '99-'18
+
+ARBTest00 <- as.numeric(ARB[2:21,"Philippines"])
+RoadsTest00 <- as.numeric(Roads[18:37, "Philippines"])
+AllImports00 <- as.numeric(AllImports[21:40,1])
+AllExports00 <- as.numeric(AllExports[21:40,1])
+ALICases00 <- as.numeric(ALICases[7:26,1])
+InequalityTest00 <- Inequality[5:24, "Gini coefficient"]
+CompPer00 <- as.numeric(CompPer[15:34,1])
+Pending00 <- as.numeric(Pending[7:26,1])
+Prod00 <- as.numeric(Prod[28:47,1])
+Yield00 <- as.numeric(Yield[28:47,1]) 
+print(Yield00)
+
+
+
+#Bind all Data Sets for Test Log
+mydata4 <- rbind(Prod00,ARBTest00,RoadsTest00,AllImports00,AllExports00,ALICases00,InequalityTest00, CompPer00)
+mydata4.df <- data.frame(mydata4)
+print(mydata4.df)
+
+#Simple Regression Test 3
+LReg <- lm(formula= CompPer00~RoadsTest00+AllExports00+AllImports00+ALICases00, data=mydata4.df)
+LReg
+summary(LReg)
+
+
+#log 
+LogARBTest00 <- log(as.numeric(ARB[2:21,"Philippines"]))
+LogRoadsTest00 <- log(as.numeric(Roads[18:37, "Philippines"]))
+LogAllImports00 <- log(as.numeric(AllImports[21:40,1]))
+LogAllExports00 <- log(as.numeric(AllExports[21:40,1]))
+LogALICases00 <- log(as.numeric(ALICases[7:26,1]))
+LogInequalityTest00 <- log(Inequality[5:24, "Gini coefficient"])
+LogCompPer00 <- log(as.numeric(CompPer[15:34,1]))
+LogPending00 <- log(as.numeric(Pending[7:26,1]))
+LogProd00 <- log(as.numeric(Prod[28:47,1]))
+LogYield00 <- log(as.numeric(Yield[28:47,1]))
+print(LogYield00)
+
+#Bind all Data Sets for Test Log
+mydata4 <- rbind(LogARBTest00,LogRoadsTest00,LogAllImports00,LogAllExports00,LogARBTest00,LogALICases00,LogInequalityTest00,LogCompPer00,LogProd00,LogYield00)
+mydata4.df <- data.frame(mydata4)
+print(mydata4.df)
+
+#Simple Regression Test 3
+LogReg <- lm(formula= LogCompRate00~LogRoadsTest00+LogAllImports00+LogAllExports00+LogALICases00+LogInequalityTest00, data=mydata4.df)
+LogReg
+summary(LogReg)
+
+#Simple Regression Test 3
+LogReg <- lm(formula= LogCompPer00~LogALICases00+LogInequalityTest00+LogProd00+LogAllImports00, data=mydata4.df)
+LogReg
+summary(LogReg)
+cor(LogProd00,LogCompPer00, method="pearson")
+cor(LogALICases00,LogCompPer00, method="pearson")
+cor(LogInequalityTest00, LogCompPer00,method="pearson")
+cor(LogAllImports00, LogCompPer00, method="pearson")

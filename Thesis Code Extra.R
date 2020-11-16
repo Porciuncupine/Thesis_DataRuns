@@ -70,6 +70,16 @@ LogReg <- lm(formula = LogCompPer9397~LogProd9397+LogALICases9397+LogInequalityT
 LogReg
 summary(LogReg)
 
+# Multicollinearity Test
+car::vif(LogReg)
+
+#Heteroscedasticity Test
+lmtest::bptest(LogReg)
+car::ncvTest(LogReg)
+
+#Autocorrelation Test
+checkresiduals(LogReg, lag=1)
+
 
 # Checking for correlations
 cor(LogProd9397,LogCompPer9397, method="pearson")
@@ -122,6 +132,16 @@ LogReg <- lm(formula = LogCompPer9802~LogProd9802+LogALICases9802+LogInequalityT
 LogReg
 summary(LogReg)
 
+# Multicollinearity Test
+car::vif(LogReg)
+
+#Heteroscedasticity Test
+lmtest::bptest(LogReg)
+car::ncvTest(LogReg)
+
+#Autocorrelation Test
+checkresiduals(LogReg, lag=1)
+
 # Checking for correlations
 cor(LogProd9397,LogCompPer9397, method="pearson")
 cor(LogALICases9397,LogCompPer9397, method="pearson")
@@ -171,6 +191,16 @@ print(mydata0307_log.df)
 LogReg <- lm(formula = LogCompPer0307~LogProd0307+LogALICases0307+LogInequalityTest0307, data=mydata0307_log.df)
 LogReg
 summary(LogReg)
+
+# Multicollinearity Test
+car::vif(LogReg)
+
+#Heteroscedasticity Test
+lmtest::bptest(LogReg)
+car::ncvTest(LogReg)
+
+#Autocorrelation Test
+checkresiduals(LogReg, lag=1)
 
 # Checking for correlations
 cor(LogProd0307,LogCompPer0307, method="pearson")
@@ -223,6 +253,16 @@ LogReg <- lm(formula = LogCompPer0812~LogProd0812+LogALICases0812+LogInequalityT
 LogReg
 summary(LogReg)
 
+# Multicollinearity Test
+car::vif(LogReg)
+
+#Heteroscedasticity Test
+lmtest::bptest(LogReg)
+car::ncvTest(LogReg)
+
+#Autocorrelation Test
+checkresiduals(LogReg, lag=1)
+
 # Checking for correlations
 cor(LogProd0812,LogCompPer0812, method="pearson")
 cor(LogALICases0812,LogCompPer0812, method="pearson")
@@ -272,6 +312,16 @@ print(mydata1317_log.df)
 LogReg <- lm(formula = LogCompPer1317~LogProd1317+LogALICases1317+LogInequalityTest1317, data=mydata1317_log.df)
 LogReg
 summary(LogReg)
+
+# Multicollinearity Test
+car::vif(LogReg)
+
+#Heteroscedasticity Test
+lmtest::bptest(LogReg)
+car::ncvTest(LogReg)
+
+#Autocorrelation Test
+checkresiduals(LogReg, lag=1)
 
 # Checking for correlations
 cor(LogProd0812,LogCompPer0812, method="pearson")

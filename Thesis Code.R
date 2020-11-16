@@ -240,10 +240,20 @@ LogReg <- lm(formula= LogCompPer00~
 LogReg
 summary(LogReg)
 
+# Multicollinearity Test
+car::vif(LogReg)
+
+#Heteroscedasticity Test
+lmtest::bptest(LogReg)
+car::ncvTest(LogReg)
+
+#Autocorrelation Test
+checkresiduals(LogReg, lag=1)
+
+
 # Checking for correlations
 cor(LogProd00,LogCompPer00, method="pearson")
 cor(LogALICases00,LogCompPer00, method="pearson")
 cor(LogInequalityTest00, LogCompPer00,method="pearson")
 cor(LogAllImports00, LogCompPer00, method="pearson")
 
-#####

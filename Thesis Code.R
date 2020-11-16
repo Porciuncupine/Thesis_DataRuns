@@ -44,11 +44,11 @@ AllExports <- t(`Thesis.Dataset...All.Exports.2000.=.100`)
 CerealImports <- t(`Thesis.Dataset...Rice.and.Corn.Imports.Value.in.Nominal.US$`)
 ####
 
-CompPer <- t(Thesis.Dataset...Percent.Gross.Area.Accomplished) #Changed Dataset Name
-ALI_Caseload_Cases <- t(Thesis.Dataset...Caseload.only.Agrarian.Law.IMP) #Changed Dataset and Variable Name
+CompPer <- t(Thesis.Dataset...Accomplishment.Rate) #Changed Dataset Name
+ALI_Caseload_Cases <- t(Thesis.Dataset...ALI) #Changed Dataset and Variable Name
 Pending_Caseload_Ratio <- t(Thesis.Dataset...Pending_Caseload.Agrarian.Law.IMP)#Changed Dataset and Variable Name
 Prod <- t(Thesis.Dataset...Production)
-Yield <- t(Thesis.Dataset...Yield.Only)
+Yield <- t(Thesis.Dataset...Yield)
 print(Yield)
 
 # Test 1

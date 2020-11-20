@@ -35,8 +35,7 @@ ALICases9397 <- as.numeric(ALI_Caseload_Cases[1:5,1]) #Changed Name
 InequalityTest9397 <- as.numeric(Inequality[1:5, "Gini coefficient"])
 CompPer9397 <- as.numeric(CompPer[9:13,"Philippines"]) 
 Prod9397 <- as.numeric(Prod[22:26,"Total"])
-print(CompPer9397)
-
+print(InequalityTest9397)
 
 #Bind all Data Sets for '93-'97
 mydata9397 <- rbind(ALICases9397,InequalityTest9397, CompPer9397, Prod9397)
@@ -61,7 +60,7 @@ print(LogCompPer9397)
 
 
 #Bind all Data Sets for '93-'97
-mydata9397_log <- rbind(LogALICases9397, LogALICases9397, LogCompPer9397, LogProd9397)
+mydata9397_log <- rbind(LogALICases9397, LogInequalityTest9397, LogCompPer9397, LogProd9397)
 mydata9397_log.df <- data.frame(mydata9397_log)
 print(mydata9397_log.df)
 
@@ -123,7 +122,7 @@ print(LogCompPer9802)
 
 
 #Bind all Data Sets for Log
-mydata9802_log <- rbind(LogALICases9802, LogALICases9802, LogCompPer9802, LogProd9802)
+mydata9802_log <- rbind(LogALICases9802, LogInequalityTest9802, LogCompPer9802, LogProd9802)
 mydata9802_log.df <- data.frame(mydata9802_log)
 print(mydata9802_log.df)
 
@@ -183,7 +182,7 @@ print(LogCompPer0307)
 
 
 #Bind all Data Sets for Log
-mydata0307_log <- rbind(LogALICases0307, LogALICases0307, LogCompPer0307, LogProd0307)
+mydata0307_log <- rbind(LogALICases0307, LogInequalityTest0307, LogCompPer0307, LogProd0307)
 mydata0307_log.df <- data.frame(mydata0307_log)
 print(mydata0307_log.df)
 
@@ -244,7 +243,7 @@ print(LogCompPer0812)
 
 
 #Bind all Data Sets for Log
-mydata0812_log <- rbind(LogALICases0812, LogALICases0812, LogCompPer0812, LogProd0812)
+mydata0812_log <- rbind(LogALICases0812, LogInequalityTest0812, LogCompPer0812, LogProd0812)
 mydata0812_log.df <- data.frame(mydata0812_log)
 print(mydata0812_log.df)
 
@@ -304,7 +303,7 @@ print(LogCompPer1317)
 
 
 #Bind all Data Sets for Log
-mydata1317_log <- rbind(LogALICases1317, LogALICases1317, LogCompPer1317, LogProd1317)
+mydata1317_log <- rbind(LogALICases1317, LogInequalityTest1317, LogCompPer1317, LogProd1317)
 mydata1317_log.df <- data.frame(mydata1317_log)
 print(mydata1317_log.df)
 

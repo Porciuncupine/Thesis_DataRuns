@@ -24,7 +24,7 @@ Inequality <- t(Thesis.Dataset...Gini.Coefficient)
 ALI_Cases <-t(Thesis.Dataset...RegionCases)
 CompRate <- t(Thesis.Dataset...RegCompRate)
 Prod <- t(Thesis.Dataset...RegionProd)
-print(CompRate)
+print(ALI_Cases)
 
 #RegCompPer ~ Reg ALI Cases + Inequality + Reg Production
 #Region 1
@@ -32,7 +32,7 @@ ALICasesReg1 <- as.numeric(ALI_Cases[,"I"])
 InequalityTest <- as.numeric(Inequality[6:26, "Gini coefficient"])
 CompPerReg1 <- as.numeric(CompRate[,"I"])
 ProdReg1 <- as.numeric(Prod[,"R1"])
-print(ProdReg1)
+print(ALICasesReg1)
 
 #Bind all Data Sets for Region 1
 mydataReg1 <- rbind(ALICasesReg1,InequalityTest, CompPerReg1, ProdReg1)

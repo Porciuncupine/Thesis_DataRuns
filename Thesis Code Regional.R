@@ -115,11 +115,11 @@ LReg <- lm(formula= CompPerReg4~ProdReg4+ALICasesReg4+InequalityTest, data=mydat
 LReg
 summary(LReg)
 
-#logging datasets
-LogALICasesReg4 <- log(as.numeric(ALI_Cases[,"IV-A"]))
-LogInequalityTest <- log(as.numeric(Inequality[6:26, "Gini coefficient"]))
-LogCompPerReg4 <- log(as.numeric(CompRate[,"IV-A"]))
-LogProdReg4 <- log(as.numeric(Prod[,"R4A"]))
+#logging datasets but only 2-21
+LogALICasesReg4 <- log(as.numeric(ALI_Cases[2:21,"IV-A"]))
+LogInequalityTest <- log(as.numeric(Inequality[7:26, "Gini coefficient"]))
+LogCompPerReg4 <- log(as.numeric(CompRate[2:21,"IV-A"]))
+LogProdReg4 <- log(as.numeric(Prod[2:21,"R4A"]))
 print(LogProdReg4)
 
 #Bind all Data Sets for Region 4
@@ -201,7 +201,6 @@ print(mydataReg12_log.df)
 LogReg <- lm(formula = LogCompPerReg12~LogProdReg12+LogALICasesReg12+LogInequalityTest, data=mydataReg12_log.df)
 LogReg
 summary(LogReg)
-
 
 ##################################################################################
 #Region ARMM

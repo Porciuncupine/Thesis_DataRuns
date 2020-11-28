@@ -327,3 +327,72 @@ cor(LogProd0812,LogCompPer0812, method="pearson")
 cor(LogALICases0812,LogCompPer0812, method="pearson")
 cor(LogInequalityTest0812, LogCompPer0812,method="pearson")
 
+
+######################################## 10 years
+#Logging Datasets
+LogALICases0817 <- log(as.numeric(ALI_Caseload_Cases[16:25,1]))
+LogInequalityTest0817 <- log(as.numeric(Inequality[16:25, "Gini coefficient"]))
+LogCompPer0817 <- log(as.numeric(CompPer[24:33, 1])) 
+LogProd0817 <- log(as.numeric(Prod[37:46,"Total"]))
+print(LogCompPer0817)
+
+
+#Bind all Data Sets for Log
+mydata0817_log <- rbind(LogALICases0817, LogInequalityTest0817, LogCompPer0817, LogProd0817)
+mydata0817_log.df <- data.frame(mydata0817_log)
+print(mydata0817_log.df)
+
+# LogCompPer ~ LogALI Cases + LogInequality + LogProduction
+LogReg <- lm(formula = LogCompPer0817~LogProd0817+LogALICases0817+LogInequalityTest0817, data=mydata0817_log.df)
+LogReg
+summary(LogReg)
+
+######################################## 10 years
+#Logging Datasets
+LogALICases9807 <- log(as.numeric(ALI_Caseload_Cases[6:15,1]))
+LogInequalityTest9807 <- log(as.numeric(Inequality[6:15, "Gini coefficient"]))
+LogCompPer9807 <- log(as.numeric(CompPer[14:23, 1])) 
+LogProd9807 <- log(as.numeric(Prod[27:36,"Total"]))
+print(LogCompPer9807)
+
+
+#Bind all Data Sets for Log
+mydata9807_log <- rbind(LogALICases9807, LogInequalityTest9807, LogCompPer9807, LogProd9807)
+mydata9807_log.df <- data.frame(mydata9807_log)
+print(mydata9807_log.df)
+
+# LogCompPer ~ LogALI Cases + LogInequality + LogProduction
+LogReg <- lm(formula = LogCompPer9807~LogProd9807+LogALICases9807+LogInequalityTest9807, data=mydata9807_log.df)
+LogReg
+summary(LogReg)
+
+
+######################################## 25 years
+#Logging Datasets
+LogALICases9418 <- log(as.numeric(ALI_Caseload_Cases[2:26,1]))
+LogInequalityTest9418 <- log(as.numeric(Inequality[2:26, "Gini coefficient"]))
+LogCompPer9418 <- log(as.numeric(CompPer[10:34, 1])) 
+LogProd9418 <- log(as.numeric(Prod[23:47,"Total"]))
+print(LogCompPer9418)
+
+
+#Bind all Data Sets for Log
+mydata9418_log <- rbind(LogALICases9418, LogInequalityTest9418, LogCompPer9418, LogProd9418)
+mydata9418_log.df <- data.frame(mydata9418_log)
+print(mydata9418_log.df)
+
+# LogCompPer ~ LogALI Cases + LogInequality + LogProduction
+LogReg <- lm(formula = LogCompPer9418~LogProd9418+LogALICases9418+LogInequalityTest9418, data=mydata9418_log.df)
+LogReg
+summary(LogReg)
+
+# Multicollinearity Test
+car::vif(LogReg)
+
+#Heteroscedasticity Test
+lmtest::bptest(LogReg)
+car::ncvTest(LogReg)
+
+#Autocorrelation Test
+checkresiduals(LogReg, lag=1)
+

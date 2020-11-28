@@ -26,7 +26,7 @@
 ##############################################################################################
   
 #loading,transposing, and naming datasets
-ARB <- t(`Thesis.Dataset...(ARBs).Benficiaries`)
+ARB <- t(Thesis.Dataset...Benficiaries)
 Roads <- t(Thesis.Dataset...Roads)
 Inequality <- t(Thesis.Dataset...Gini.Coefficient)
 
@@ -36,8 +36,8 @@ Cases_Solved <- t(Thesis.Dataset...Adjudication.Cases.Resolved.per.Year)
 #####
 
 CompRate <- t(Thesis.Dataset...Gross.Area.Accomplished)
-AllImports <- t(`Thesis.Dataset...All.Imports.2000.=.100`)
-AllExports <- t(`Thesis.Dataset...All.Exports.2000.=.100`)
+AllImports <- t(Thesis_Dataset_All_Imports)
+AllExports <- t(Thesis_Dataset_All_Exports_)
 
 ####Omit
 #Not used for now
@@ -175,17 +175,18 @@ summary(LogReg)
 #####################################################################################
 #CompRate ~ Roads + Exports + Imports + Gini, '99-'18
 
-ARBTest00 <- as.numeric(ARB[2:21,"Philippines"])
-RoadsTest00 <- as.numeric(Roads[18:37, "Philippines"])
-AllImports00 <- as.numeric(AllImports[21:40,1])
-AllExports00 <- as.numeric(AllExports[21:40,1])
-ALICases00 <- as.numeric(ALI_Caseload_Cases[7:26,1]) #Changed Name
-InequalityTest00 <- Inequality[5:24, "Gini coefficient"]
-CompPer00 <- as.numeric(CompPer[15:34,1]) 
-Pending00 <- as.numeric(Pending_Caseload_Ratio[7:26,1])
-Prod00 <- as.numeric(Prod[28:47,1])
-Yield00 <- as.numeric(Yield[28:47,1]) 
+ARBTest00 <- as.numeric(ARB[4:23,"Philippines"])
+RoadsTest00 <- as.numeric(Roads[20:39, "Philippines"])
+AllImports00 <- as.numeric(AllImports[23:42,1])
+AllExports00 <- as.numeric(AllExports[23:42,1])
+ALICases00 <- as.numeric(ALI_Caseload_Cases[9:28,1]) #Changed Name
+InequalityTest00 <- Inequality[7:26, "Gini coefficient"]
+CompPer00 <- as.numeric(CompPer[17:36,1]) 
+Pending00 <- as.numeric(Pending_Caseload_Ratio[9:28,1])
+Prod00 <- as.numeric(Prod[30:49,1])
+Yield00 <- as.numeric(Yield[30:49,1]) 
 print(Yield00)
+View(ALICases00)
 
 #Bind all Data Sets for Test 5
 mydata5 <- rbind(Prod00,ARBTest00,RoadsTest00,AllImports00,AllExports00,ALICases00,InequalityTest00, CompPer00)
@@ -239,6 +240,8 @@ LogReg <- lm(formula= LogCompPer00~
                LogALICases00 + LogInequalityTest00 + LogProd00, data=mydata5_log.df)
 LogReg
 summary(LogReg)
+summary(mydata5_log.df)
+summary(mydata5.df)
 
 # Multicollinearity Test
 car::vif(LogReg)
